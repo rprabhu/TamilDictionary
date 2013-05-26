@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta charset="utf-8" />
+<title>தமிழ்மொழி அகராதி</title>
+<link rel="stylesheet"
+    href="//code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+<link rel="stylesheet"
+    href="//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css" />
+<link rel="stylesheet" href="css/style.css" />
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script src="//code.jquery.com/jquery-1.9.1.js"></script>
+<script src="//code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+<script
+    src="//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+<script src="js/renderer.js"></script>
+<script src="js/jquery.highlight-4.js"></script>
+<script>
+    if (!String.prototype.trim)
+    {
+        String.prototype.trim = function()
+        {
+            return this.replace(/^\s+|\s+$/g, '');
+        };
+    }
+
+    // Load the Google Transliterate API
+    google.load("elements", "1", {
+        packages : "transliteration"
+    });
+    google.load("language", "1");
+
+
+    //google.setOnLoadCallback(onLoad);
+
+    $(document).ready(function()
+    {
+        loadFile("json/alpha.json", renderTabs);
+        $("#wordSearch").keypress(handleSearch);
+        var options = {
+                sourceLanguage : google.elements.transliteration.LanguageCode.ENGLISH,
+                destinationLanguage : [ google.elements.transliteration.LanguageCode.TAMIL ],
+                shortcutKey : 'ctrl+g',
+                transliterationEnabled : true
+            };
+
+            // Create an instance on TransliterationControl with the required options.
+            var control = new google.elements.transliteration.TransliterationControl(options);
+
+            // Enable transliteration in the textbox with id 'transliterateTextarea'.
+            control.makeTransliteratable([ 'wordSearch' ]);
+    });
+</script>
+<style>
+</style>
+</head>
+<body>
+    <h3>தமிழ்மொழி அகராதி</h3>
+    <label class="searchBox">தேடுக:<input id="wordSearch" type="text" /></label>
+    <div></div>
+    <div id="tabs">
+        <ul>
+        </ul>
+    </div>
+    <div id="footer">
+        <div>Copyright &copy; 2013. All Rights Reserved | <a href="license.txt">License</a> | <a href="disclaimer.html">Disclaimer</a> | <a href="aboutme.html">About me</a> </div>
+    </div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-41199316-1', 'google.com');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>
